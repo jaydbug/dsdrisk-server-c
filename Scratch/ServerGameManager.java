@@ -47,7 +47,6 @@ public class ServerGameManager {
          */
         public void run() {
             try {
-
                 // Decorate the streams so we can send characters
                 // and not just bytes.  Ensure output is flushed
                 // after every newline.
@@ -63,20 +62,27 @@ public class ServerGameManager {
                 // capitalized
                 while (true) {
                     String input = in.readLine();
+                    log("IN (" + clientNumber + "): " + input );
+                    
                     if (input == null || input.equals(".")) {
                         break;
                     }
-                    out.println(input.toUpperCase());
+                    
+                    String output = input.toUpperCase();
+                    
+                    log("OUT (" + clientNumber + "): " + output);
+                    out.println(output);
+                    
                 }
             } catch (IOException e) {
-                log("Error handling client# " + clientNumber + ": " + e);
+                log("Error handling client #" + clientNumber + ": " + e);
             } finally {
                 try {
                     socket.close();
                 } catch (IOException e) {
                     log("Couldn't close a socket, what's going on?");
                 }
-                log("Connection with client# " + clientNumber + " closed");
+                log("Connection with client #" + clientNumber + " closed");
             }
         }
 
