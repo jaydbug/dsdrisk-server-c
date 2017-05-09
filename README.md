@@ -1,2 +1,2 @@
 # cs-423-dsdrisk
-DSDRisk game using Java Spark
+Server-side Game Manager for DSDRisk 2017.
