@@ -4,8 +4,19 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.*;
 
 public class ServerGameManager {
+
+    public static Map<Integer, Socket> clientMap = new HashMap<Integer, Socket>();
+    
+    public static void addClient(int clientNum, Socket soc) {
+        clientMap.put(clientNum, soc);
+    }
+    
+    public static Set getClientSet() {
+        return clientMap.entrySet();
+    }
 
     /**
      * Application method to run the server runs in an infinite loop
@@ -15,8 +26,9 @@ public class ServerGameManager {
      */
     public static void main(String[] args) throws Exception {
         System.out.println("Server is running...");
-        int clientNumber = 0;
+        int clientNumber = 1;
         ServerSocket listener = new ServerSocket(9898);
+        
         try {
             while (true) {
                 new Handler(listener.accept(), clientNumber++).start();
@@ -38,7 +50,17 @@ public class ServerGameManager {
         public Handler(Socket socket, int clientNumber) {
             this.socket = socket;
             this.clientNumber = clientNumber;
-            log("New connection with client# " + clientNumber + " at " + socket);
+            
+            try {
+                socket.setKeepAlive(true);
+            } catch (Exception e) {
+                System.out.println("ERROR: Unable to keep socket alive for client #" + clientNumber);
+                e.printStackTrace();
+            }
+            
+            addClient(clientNumber, socket);
+
+            log("New connection with client# " + clientNumber + " at " + socket);   
         }
 
         /**
@@ -67,12 +89,11 @@ public class ServerGameManager {
                     if (input == null || input.equals(".")) {
                         break;
                     }
-                    
+
                     String output = input.toUpperCase();
                     
                     log("OUT (" + clientNumber + "): " + output);
                     out.println(output);
-                    
                 }
             } catch (IOException e) {
                 log("Error handling client #" + clientNumber + ": " + e);
