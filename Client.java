@@ -136,10 +136,10 @@ public class Client extends JFrame {
 				echoNotification("The lights dim and electro music starts playing... PARTY PARROT IS OUT TO PLAY!");
 				break;
 			case ":alex_rules:":
-				echoNotification(username + " would like you all to know Alex is the best!");
+				echoNotification(userName + " would like you all to know Alex is the best!");
 				break;
 			case ":cyberbully:":
-				echoNotification(username + " would like you to know that Matt still doesn't have an ix account :((((");
+				echoNotification(userName + " would like you to know that Matt still doesn't have an ix account :((((");
 					break;
 			default:			// send message to server
 				_outputStream.writeUTF("[" + timeStamp + "] " + userName + ": " + message);
