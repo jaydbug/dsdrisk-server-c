@@ -83,7 +83,8 @@ public class ClientTest {
 						JOptionPane.QUESTION_MESSAGE);
 
 				// Make connection and initialize streams
-				Socket socket = new Socket(serverAddress, 9898);
+				int port = 12345;
+				Socket socket = new Socket(serverAddress, port);
 				in = new BufferedReader(
 								new InputStreamReader(socket.getInputStream()));
 				out = new PrintWriter(socket.getOutputStream(), true);
