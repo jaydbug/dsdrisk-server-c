@@ -91,7 +91,7 @@ public class Client extends JFrame {
 			_connectionLabel.setText("Connected to " + address + ":" + PORT);
 
 			_outputStream = new ObjectOutputStream(_socket.getOutputStream());
-			_outputStream.flush();
+			//_outputStream.flush();
 
 			_inputStream = new ObjectInputStream(_socket.getInputStream());
 

@@ -45,7 +45,8 @@ public class Server {
 		}	// end getOutputStream()
 		
 		public SocketAddress getSocketAddr() {
-			return _socket.getLocalSocketAddress();
+			//return _socket.getLocalSocketAddress();
+			return _socket.getRemoteSocketAddress();
 		}
 
 	}	// end class ObjectSocket
