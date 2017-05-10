@@ -84,14 +84,14 @@ public class Client extends JFrame {
 
 		// connect client to server
 		try {
+//			InetAddress address = InetAddress.getLocalHost();
 			InetAddress address = InetAddress.getByName("128.223.4.35");
-			//InetAddress address = InetAddress.getLocalHost();
-			
+		
 			_socket = new Socket(address, PORT);
 			_connectionLabel.setText("Connected to " + address + ":" + PORT);
 
 			_outputStream = new ObjectOutputStream(_socket.getOutputStream());
-			//_outputStream.flush();
+			_outputStream.flush();
 
 			_inputStream = new ObjectInputStream(_socket.getInputStream());
 
@@ -133,8 +133,7 @@ public class Client extends JFrame {
 				echoNotification("[[ " + userName + ", the available chat commands are: /shutdown, /name ]]");
 				break;
 			default:			// send message to server
-				// _outputStream.writeUTF("[" + timeStamp + "] " + userName + ": " + message);
-				_outputStream.writeUTF(message);
+				_outputStream.writeUTF("[" + timeStamp + "] " + userName + ": " + message);
 				_outputStream.flush();
 				break;
 			}
