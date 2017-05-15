@@ -132,6 +132,15 @@ public class Client extends JFrame {
 			case "/?":			// help command
 				echoNotification("[[ " + userName + ", the available chat commands are: /shutdown, /name ]]");
 				break;
+			case ":party_parrot:":
+				echoNotification("The lights dim and electro music starts playing... PARTY PARROT IS OUT TO PLAY!");
+				break;
+			case ":alex_rules:":
+				echoNotification(userName + " would like you all to know Alex is the best!");
+				break;
+			case ":cyberbully:":
+				echoNotification(userName + " would like you to know that Matt still doesn't have an ix account :((((");
+					break;
 			default:			// send message to server
 				_outputStream.writeUTF("[" + timeStamp + "] " + userName + ": " + message);
 				_outputStream.flush();
