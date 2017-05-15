@@ -109,6 +109,12 @@ public class Server {
 				
 			} catch (IOException ex) {
 				System.out.println("[ERROR]: " + objectSocket + "did not recieve message: " + message);
+				
+				// TODO handle disconnect
+				if (_queue.contains(_queue)) {
+					System.out.println("Caught client disconnect");
+				}
+				
 			}
 		}
 	}	// end broadcastMessage(String message)
