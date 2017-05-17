@@ -93,10 +93,7 @@ public class Server {
 		}	// end run()
 	}	// end class IORunnable
 
-
-	private void broadcastMessage(String message) {
-		System.out.println("\n[BROADCAST]: " + message);
-		
+	private void broadcastMessage(String message) {		
 		for (ObjectSocket objectSocket : _queue) {
 			// Try/catch inside loop so that one failed
 			// write does not prevent remaining writes
@@ -104,21 +101,21 @@ public class Server {
 			try {
 				outputStream.writeUTF(message);
 				outputStream.flush();
-				
-				System.out.println("Sent to " + objectSocket.getSocketAddr());
+				System.out.println("[BROADCAST]: " + message + " sent to " + objectSocket.getSocketAddr().toString());
 				
 			} catch (IOException ex) {
 				System.out.println("[ERROR]: " + objectSocket + "did not recieve message: " + message);
-				
-				// Handle client disconnects
-				if (_queue.contains(objectSocket)) {
-					_queue.remove(objectSocket);
-					System.out.println("[INFO]: Removed " + objectSocket.getSocketAddr() + " from active clients");
-				}
-				
+				removeIdleConnection(objectSocket);
 			}
 		}
 	}	// end broadcastMessage(String message)
+	
+	private void removeIdleConnection(ObjectSocket objectSocket) {
+		if (_queue.contains(objectSocket)) {
+			_queue.remove(objectSocket);
+			System.out.println("[INFO]: Removed " + objectSocket.getSocketAddr().toString() + " from active clients");
+		}
+	}
 
 
 	public static void main(String[] args) {
