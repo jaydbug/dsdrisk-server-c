@@ -111,7 +111,7 @@ public class Server {
 				System.out.println("[ERROR]: " + objectSocket + "did not recieve message: " + message);
 				
 				// TODO handle disconnect
-				if (_queue.contains(_queue)) {
+				if (_queue.contains(objectSocket)) {
 					System.out.println("Caught client disconnect");
 				}
 				
