@@ -112,7 +112,8 @@ public class Server {
 				
 				// TODO handle disconnect
 				if (_queue.contains(objectSocket)) {
-					System.out.println("Caught client disconnect");
+					_queue.remove(objectSocket);
+					System.out.println("[INFO]: Removed " + objectSocket.getLocalSocketAddress() + " from active clients");
 				}
 				
 			}
