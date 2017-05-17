@@ -110,10 +110,10 @@ public class Server {
 			} catch (IOException ex) {
 				System.out.println("[ERROR]: " + objectSocket + "did not recieve message: " + message);
 				
-				// TODO handle disconnect
+				// Handle client disconnects
 				if (_queue.contains(objectSocket)) {
 					_queue.remove(objectSocket);
-					System.out.println("[INFO]: Removed " + objectSocket.getLocalSocketAddress() + " from active clients");
+					System.out.println("[INFO]: Removed " + objectSocket.getSocketAddr() + " from active clients");
 				}
 				
 			}
